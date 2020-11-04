@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void loadCSV() {
-    loadAsset('assets/SalaahTimes.csv').then((dynamic output) {
+    loadAsset('assets/sales.csv').then((dynamic output) {
       csvRaw = output;
       print(csvRaw);
     });
