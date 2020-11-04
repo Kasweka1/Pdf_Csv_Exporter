@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "CSV App",
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -30,25 +31,25 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home Page"),
+        backgroundColor: Colors.green,
       ),
       body: Container(
         child: Center(
           child: RaisedButton(
             child: Text("Click Me"),
             onPressed: () {
-              loadCSV();
-              saveCsv();
+              loadCSV();          
             },
             color: Colors.deepOrange,
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     print("Saveed file");
-      //   },
-      //   child: Icon(Icons.save),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          saveCsv();
+        },
+        child: Icon(Icons.save),
+      ),
     );
   }
 
@@ -63,6 +64,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 }
+
 
 final pdf = pw.Document();
 
