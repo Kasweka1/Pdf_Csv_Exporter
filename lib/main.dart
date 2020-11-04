@@ -37,11 +37,11 @@ class MyHomePage extends StatelessWidget {
           return <pw.Widget>  [
             pw.Header(
               level: 0,
-              child: pw.Text("Easy Approach Document")
+              child: pw.Text("PDF flutter Ecport")
             ),
 
             pw.Paragraph(
-              text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."
+              text: "This is an exprted flutter pdf file in the documents dorectory."
             ),
 
             pw.Paragraph(
@@ -77,7 +77,7 @@ class MyHomePage extends StatelessWidget {
 
     String documentPath = documentDirectory.path;
 
-    File file = File("$documentPath/example.pdf");
+    File file = File("$documentPath/exported_document.pdf");
 
     file.writeAsBytesSync(pdf.save());
   }
@@ -111,7 +111,7 @@ class MyHomePage extends StatelessWidget {
 
           String documentPath = documentDirectory.path;
 
-          String fullPath = "$documentPath/example.pdf";
+          String fullPath = "$documentPath/exported_document.pdf";
 
           Navigator.push(context, MaterialPageRoute(
             builder: (context) => PdfPreviewScreen(path: fullPath,)
