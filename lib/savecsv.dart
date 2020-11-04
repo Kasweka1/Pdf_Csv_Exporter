@@ -1,7 +1,8 @@
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:pdf/widgets.dart' as pw;
 
-// Future pdf = save(pdf);
+Future pdf = pw.Document();
 
 Future savePdf() async {
   Directory documentDirectory = await getApplicationDocumentsDirectory();
