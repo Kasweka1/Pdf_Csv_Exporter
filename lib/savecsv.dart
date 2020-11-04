@@ -1,12 +1,14 @@
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
-Future savePdf() async{
-    Directory documentDirectory = await getApplicationDocumentsDirectory();
+// Future pdf = save(pdf);
 
-    String documentPath = documentDirectory.path;
+Future savePdf() async {
+  Directory documentDirectory = await getApplicationDocumentsDirectory();
 
-    File file = File("$documentPath/exported_document.csv");
+  String documentPath = documentDirectory.path;
 
-    file.writeAsBytesSync(pdf.save());
-  }
+  File file = File("$documentPath/exported_document.csv");
+
+  file.writeAsBytesSync(pdf.save());
+}
