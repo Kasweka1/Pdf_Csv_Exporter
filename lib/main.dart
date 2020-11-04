@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:csv_reader/csv_reader.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:pdf/widgets.dart' as pw;
 
 void main() => runApp(MyApp());
 
@@ -21,7 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String csvRaw;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +37,7 @@ class _HomePageState extends State<HomePage> {
             child: Text("Click Me"),
             onPressed: () {
               loadCSV();
+              saveCsv();
             },
             color: Colors.deepOrange,
           ),
@@ -58,4 +62,16 @@ class _HomePageState extends State<HomePage> {
       print(csvRaw);
     });
   }
+}
+
+final pdf = pw.Document();
+
+Future saveCsv() async {
+  Directory documentDirectory = await getApplicationDocumentsDirectory();
+
+  String documentPath = documentDirectory.path;
+
+  File file = File("$documentPath/exported_document.csv");
+
+  file.writeAsBytesSync(pdf.save());
 }
