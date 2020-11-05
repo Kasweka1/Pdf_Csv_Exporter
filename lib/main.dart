@@ -26,6 +26,8 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   final pdf = pw.Document();
 
+
+//the function that creates the pdf document
   writeOnPdf() {
     pdf.addPage(pw.MultiPage(
       pageFormat: PdfPageFormat.a5,
@@ -35,7 +37,7 @@ class MyHomePage extends StatelessWidget {
           pw.Header(level: 0, child: pw.Text("PDF flutter Export")),
           pw.Paragraph(
               text:
-                  "This is an exprted flutter pdf file in the documents directory."),
+                  "This is an exprted flutter pdf file in the documents directory. By Kasweka"),
           pw.Paragraph(
               text:
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada fames ac turpis egestas sed tempus urna. Quisque sagittis purus sit amet. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Viverra justo nec ultrices dui sapien eget mi proin sed."),
@@ -53,7 +55,7 @@ class MyHomePage extends StatelessWidget {
       },
     ));
   }
-
+// the function that saves the pdf document
   Future savePdf() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
 
