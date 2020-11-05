@@ -13,6 +13,7 @@ class CsvGeneratorDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('CSV generate and load'),
+        backgroundColor: Colors.green,
       ),
       body: Container(
         child: Center(
@@ -26,7 +27,9 @@ class CsvGeneratorDemo extends StatelessWidget {
         onPressed: () {
           _generateCSVAndView(context);
         },
-        child: Icon(Icons.save),
+        child: Icon(Icons.save, 
+        color: Colors.white,),
+        backgroundColor: Colors.green,
       ),
     );
   }
@@ -43,11 +46,11 @@ class CsvGeneratorDemo extends StatelessWidget {
       //2nd Row
       <String>['James', 'Banda', 'RPS', '06 Febuary 2002'],
     ];
-
+  // saves document
     String csv = const ListToCsvConverter().convert(csvData);
 
     final String dir = (await getApplicationDocumentsDirectory()).path;
-    final String path = '$dir/baseball_teams.csv';
+    final String path = '$dir/names.csv';
 
     // create file
     final File file = File(path);

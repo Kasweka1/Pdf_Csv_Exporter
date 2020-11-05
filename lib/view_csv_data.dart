@@ -12,6 +12,7 @@ class LoadAndViewCsvPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Load and View Csv data'),
+        backgroundColor: Colors.green,
       ),
       body: FutureBuilder(
         future: _loadCsvData(),
