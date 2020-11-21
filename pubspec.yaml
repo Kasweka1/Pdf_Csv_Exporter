@@ -27,6 +27,7 @@ dependencies:
   csv: ^4.1.0
   csv_reader: ^1.0.2
   sqflite: ^1.1.0
+  filepicker_windows: ^1.0.0
 
   # flutter_full_pdf_viewer: ^1.0.6
   path_provider: ^1.6.22

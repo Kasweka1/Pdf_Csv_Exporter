@@ -2,11 +2,19 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:filepicker_windows/filepicker_windows.dart' as picker;
 
 import 'view_csv_data.dart';
 import 'package:csv/csv.dart';
 
-class CsvGeneratorDemo extends StatelessWidget {
+class CsvGeneratorDemo extends StatefulWidget {
+  @override
+  _CsvGeneratorDemoState createState() => _CsvGeneratorDemoState();
+}
+
+class _CsvGeneratorDemoState extends State<CsvGeneratorDemo> {
+  var path;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +33,30 @@ class CsvGeneratorDemo extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _generateCSVAndView(context);
+          // _generateCSVAndView(context);
+          final file = picker.SaveFilePicker();
+          file.hidePinnedPlaces = true;
+          file.filterSpecification = {'CSV Files': '*.csv*'};
+          file.title = 'Select an image';
+          file.fileName = 'names';
+          final result = file.getFile();
+          if (result != null) {
+            setState(() {
+              path = result;
+            });
+          }
         },
-        child: Icon(Icons.save, 
-        color: Colors.white,),
+        child: Icon(
+          Icons.save,
+          color: Colors.white,
+        ),
         backgroundColor: Colors.green,
       ),
     );
   }
 
-// the function that generates a csv document from a String and saves it ti documents directory
   Future<void> _generateCSVAndView(context) async {
+
     //the list<list> which is converted to a csv
     List<List<String>> csvData = [
       // headers
@@ -46,7 +67,7 @@ class CsvGeneratorDemo extends StatelessWidget {
       //2nd Row
       <String>['James', 'Banda', 'RPS', '06 Febuary 2002'],
     ];
-  // saves document
+    // saves document
     String csv = const ListToCsvConverter().convert(csvData);
 
     final String dir = (await getApplicationDocumentsDirectory()).path;
