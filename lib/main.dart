@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-// import 'csv.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'dart:io';
-
-
+import 'package:filepicker_windows/filepicker_windows.dart' as picker;
 
 void main() => runApp(MyApp());
 
@@ -19,13 +17,27 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-class MyHomePage extends StatelessWidget {
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+
+class _MyHomePageState extends State<MyHomePage> {
+  File path;
+  
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final pdf = pw.Document();
 
-//the function that creates the pdf document
   writeOnPdf() {
     pdf.addPage(pw.MultiPage(
-      pageFormat: PdfPageFormat.a5,
+      pageFormat: PdfPageFormat.a4,
       margin: pw.EdgeInsets.all(32),
       build: (pw.Context context) {
         return <pw.Widget>[
@@ -51,9 +63,8 @@ class MyHomePage extends StatelessWidget {
     ));
   }
 
-// the function that saves the pdf document
   Future savePdf() async {
-    Directory documentDirectory = await getApplicationDocumentsDirectory();
+    var documentDirectory = await getApplicationDocumentsDirectory();
 
     String documentPath = documentDirectory.path;
 
@@ -61,6 +72,7 @@ class MyHomePage extends StatelessWidget {
 
     file.writeAsBytesSync(pdf.save());
   }
+  
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +88,7 @@ class MyHomePage extends StatelessWidget {
             Text(
               "Save Pdf on Floating ActionButton",
               style: TextStyle(fontSize: 34),
-            )
+            ),
           ],
         ),
       ),
@@ -84,11 +96,23 @@ class MyHomePage extends StatelessWidget {
         onPressed: () {
           writeOnPdf();
           //the save function has been called
-          savePdf();
+          final fileDialog = picker.SaveFilePicker();
+          fileDialog.hidePinnedPlaces = false;
+          fileDialog.fileName = "Exported Document";
+          fileDialog.defaultExtension = "pdf";
+          fileDialog.forceFileSystemItems = false;
+          fileDialog.filterSpecification = {'PDF Files': '*.pdf;'};
+          fileDialog.title = 'Select were to Save pdf';
+          final result = fileDialog.getFile();
+          var myFile = new File('file.pdf');
+          if (result != null) {
+            setState(() {
+              path = result;
+            });
+          }
         },
         child: Icon(Icons.save),
       ),
     );
   }
 }
-

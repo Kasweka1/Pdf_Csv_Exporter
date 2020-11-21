@@ -28,6 +28,10 @@ dependencies:
   flutter_plugin_pdf_viewer: ^1.0.7
   path_provider: ^1.6.22
   pdf: ^1.11.2
+  filepicker_windows: ^1.0.0
+  filesystem_picker: ^1.0.3
+  file_picker: ^2.0.13
+  permission_handler: ^5.0.1+1
 
 
 dev_dependencies:
