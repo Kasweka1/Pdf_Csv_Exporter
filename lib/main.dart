@@ -3,6 +3,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'dart:io';
+import 'dart:async';
 import 'package:filepicker_windows/filepicker_windows.dart' as picker;
 
 void main() => runApp(MyApp());
@@ -23,10 +24,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-
 class _MyHomePageState extends State<MyHomePage> {
   File path;
-  
 
   @override
   void initState() {
@@ -61,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ];
       },
     ));
-  }
+  } // this function creates the pdf
 
   Future savePdf() async {
     var documentDirectory = await getApplicationDocumentsDirectory();
@@ -72,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     file.writeAsBytesSync(pdf.save());
   }
-  
+//this function saves it to the documents directory directly
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,8 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          writeOnPdf();
-          //the save function has been called
+          // writeOnPdf();
+          //the file dialogue function
           final fileDialog = picker.SaveFilePicker();
           fileDialog.hidePinnedPlaces = false;
           fileDialog.fileName = "Exported Document";
@@ -103,13 +102,12 @@ class _MyHomePageState extends State<MyHomePage> {
           fileDialog.forceFileSystemItems = false;
           fileDialog.filterSpecification = {'PDF Files': '*.pdf;'};
           fileDialog.title = 'Select were to Save pdf';
-          final result = fileDialog.getFile();
-          var myFile = new File('file.pdf');
-          if (result != null) {
-            setState(() {
-              path = result;
-            });
-          }
+          var savefile = fileDialog.getFile();
+          var saveFilePath = savefile.path;
+          print(saveFilePath);
+
+          //this saves the file directly to the documents directory.
+          savePdf();
         },
         child: Icon(Icons.save),
       ),
