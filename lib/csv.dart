@@ -2,8 +2,6 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:filepicker_windows/filepicker_windows.dart' as picker;
-
-import 'view_csv_data.dart';
 import 'package:csv/csv.dart';
 
 class CsvGeneratorDemo extends StatefulWidget {
@@ -74,10 +72,5 @@ class _CsvGeneratorDemoState extends State<CsvGeneratorDemo> {
     // \r\n as eol.
     await file.writeAsString(csv);
     //loads the view_csv_data page
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => LoadAndViewCsvPage(path: saveFilePath),
-      ),
-    );
   }
 }
