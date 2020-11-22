@@ -43,7 +43,8 @@ class _CsvGeneratorDemoState extends State<CsvGeneratorDemo> {
           fileDialog.title = 'Save us';
           var savefile = fileDialog.getFile();
           var saveFilePath = savefile.path;
-          print(saveFilePath);
+          File fileSave = File(saveFilePath);
+          fileSave.writeAsStringSync("Hello");
         },
         child: Icon(
           Icons.save,
