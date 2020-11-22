@@ -63,12 +63,16 @@ class _MyHomePageState extends State<MyHomePage> {
   } // this function creates the pdf
 
   Future savePdf() async {
-    var documentDirectory = await getApplicationDocumentsDirectory();
-
-    String documentPath = documentDirectory.path;
-
-    File file = File("$documentPath/exported_document.pdf");
-
+    final fileDialog = picker.SaveFilePicker();
+    fileDialog.hidePinnedPlaces = false;
+    fileDialog.fileName = "Exported Document";
+    fileDialog.defaultExtension = "pdf";
+    fileDialog.forceFileSystemItems = false;
+    fileDialog.filterSpecification = {'PDF Files': '*.pdf;'};
+    fileDialog.title = 'Select were to Save pdf';
+    var savefile = fileDialog.getFile();
+    var saveFilePath = savefile.path;
+    File file = File(saveFilePath);
     file.writeAsBytesSync(pdf.save());
   }
 //this function saves it to the documents directory directly
@@ -93,22 +97,22 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // writeOnPdf();
-          //the file dialogue function
-          final fileDialog = picker.SaveFilePicker();
-          fileDialog.hidePinnedPlaces = false;
-          fileDialog.fileName = "Exported Document";
-          fileDialog.defaultExtension = "pdf";
-          fileDialog.forceFileSystemItems = false;
-          fileDialog.filterSpecification = {'PDF Files': '*.pdf;'};
-          fileDialog.title = 'Select were to Save pdf';
-          var savefile = fileDialog.getFile();
-          var saveFilePath = savefile.path;
-          File fileSave = File(saveFilePath);
-          fileSave.writeAsStringSync("Hello");
+          // // writeOnPdf();
+          // //the file dialogue function
+          // final fileDialog = picker.SaveFilePicker();
+          // fileDialog.hidePinnedPlaces = false;
+          // fileDialog.fileName = "Exported Document";
+          // fileDialog.defaultExtension = "pdf";
+          // fileDialog.forceFileSystemItems = false;
+          // fileDialog.filterSpecification = {'PDF Files': '*.pdf;'};
+          // fileDialog.title = 'Select were to Save pdf';
+          // var savefile = fileDialog.getFile();
+          // var saveFilePath = savefile.path;
+          // // File fileSave = File(saveFilePath);
+          // // fileSave.writeAsStringSync("Hello");
 
           //this saves the file directly to the documents directory.
-          // savePdf();
+          savePdf();
         },
         child: Icon(Icons.save),
       ),
