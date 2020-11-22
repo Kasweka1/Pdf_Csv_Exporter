@@ -104,10 +104,11 @@ class _MyHomePageState extends State<MyHomePage> {
           fileDialog.title = 'Select were to Save pdf';
           var savefile = fileDialog.getFile();
           var saveFilePath = savefile.path;
-          print(saveFilePath);
+          File fileSave = File(saveFilePath);
+          fileSave.writeAsStringSync("Hello");
 
           //this saves the file directly to the documents directory.
-          savePdf();
+          // savePdf();
         },
         child: Icon(Icons.save),
       ),
