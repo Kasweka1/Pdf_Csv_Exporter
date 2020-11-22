@@ -33,18 +33,17 @@ class _CsvGeneratorDemoState extends State<CsvGeneratorDemo> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // _generateCSVAndView(context);
-          final file = picker.SaveFilePicker();
-          file.hidePinnedPlaces = true;
-          file.filterSpecification = {'CSV Files': '*.csv*'};
-          file.title = 'Select an image';
-          file.fileName = 'names';
-          final result = file.getFile();
-          if (result != null) {
-            setState(() {
-              path = result;
-            });
-          }
+          _generateCSVAndView(context);
+          final fileDialog = picker.SaveFilePicker();
+          fileDialog.hidePinnedPlaces = false;
+          fileDialog.fileName = "names";
+          fileDialog.defaultExtension = "csv";
+          fileDialog.forceFileSystemItems = false;
+          fileDialog.filterSpecification = {'CSV Files': '*.csv;'};
+          fileDialog.title = 'Save us';
+          var savefile = fileDialog.getFile();
+          var saveFilePath = savefile.path;
+          print(saveFilePath);
         },
         child: Icon(
           Icons.save,
